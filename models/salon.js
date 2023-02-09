@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const Review = require('./Reviews');
 const Owner = require('./Owner');
+const Schema = mongoose.Schema;
 
-const SalonSchema = new mongoose.Schema({
+const SalonSchema = new Schema({
     name: String,
     address: String,
     description: String,

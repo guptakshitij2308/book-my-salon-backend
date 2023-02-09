@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const ExpressError = require('./utils/ExpressError');
+const salons = require('./routes/salon');
 
 mongoose.set("strictQuery", true);
 mongoose.connect("mongodb://127.0.0.1:27017/bookmyspot");
@@ -12,10 +14,27 @@ db.once("open", () => {
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Home");
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.listen(3000, () => {
+app.use('/salons', salons)
+
+app.get('/', (req, res) => {
+  res.send('Hii');
+})
+
+app.all('*', (req, res, next) => {
+  next(new ExpressError('Page not Found', 404));
+})
+
+app.use((err, req, res, next) => {
+  const { statusCode = 500 } = err;
+  if (!err.message) {
+    err.message = 'Oh no, Something went wrong!';
+  }
+  res.status(statusCode).json(err.message);
+})
+
+app.listen(8080, () => {
   console.log("Serving on port 3000");
 });

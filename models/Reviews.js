@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const User = require('./User')
-
-const ReviewSchema = new mongoose.Schema({
+const User = require('./User');
+const Schema = mongoose.Schema;
+const ReviewSchema = new Schema({
     body: String,
     rating: Number,
     author: [
