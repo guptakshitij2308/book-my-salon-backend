@@ -4,7 +4,10 @@ const Owner = require('./Owner');
 const Schema = mongoose.Schema;
 
 const SalonSchema = new Schema({
-    name: String,
+    name: {
+        type: String,
+        required: [true, 'Salon Name is required!']
+    },
     address: String,
     description: String,
     image: String,
