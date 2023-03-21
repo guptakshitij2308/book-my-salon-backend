@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 const Review = require('./Reviews');
 const Owner = require('./Owner');
+const Schema = mongoose.Schema;
 
-const SalonSchema = new mongoose.Schema({
-    name: String,
+const SalonSchema = new Schema({
+    name: {
+        type: String,
+        required: [true, 'Salon Name is required!']
+    },
     address: String,
     description: String,
     image: String,

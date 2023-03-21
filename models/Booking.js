@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const Salon = require('./salon');
-const User = require('./User')
+const User = require('./User');
+const Schema = mongoose.Schema;
 
-const BookingSchema = new mongoose.Schema({
+const BookingSchema = new Schema({
     timeSlot: String,
     services: String,
     date: Date,
