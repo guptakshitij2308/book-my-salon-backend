@@ -22,12 +22,6 @@ const UserSchema = new Schema({
     lowercase: true,
     validate: [validator.isEmail, "Please provider a valid email address"],
   },
-  address: {
-    type: String,
-    required: [true, "A User must have a valid address"],
-    trim: true,
-    maxlength: [40, "A User address must be less 40 characters"],
-  },
   password: {
     type: String,
     required: [true, "You must have a password"],
