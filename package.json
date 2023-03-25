@@ -4,16 +4,18 @@
   "description": "Creating backend of book-my-salon",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "start:prod": "NODE_ENV=production nodemon index.js",
-    "debug": "ndb index.js"
+    "start": "nodemon server.js",
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "debug": "ndb server.js"
   },
   "author": "Kshitij Gupta",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "joi": "^17.7.0",
     "mongoose": "^6.8.4",
+    "morgan": "^1.10.0",
     "validator": "^13.9.0"
   }
 }

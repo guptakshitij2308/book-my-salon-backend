@@ -1,16 +1,7 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const morgan = require("morgan");
 const ExpressError = require("./utils/ExpressError");
 const salons = require("./routes/salon");
-
-mongoose.set("strictQuery", true);
-mongoose.connect("mongodb://127.0.0.1:27017/bookmyspot");
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("Database connected");
-});
 
 const app = express();
 
@@ -34,3 +25,5 @@ app.use((err, req, res, next) => {
   }
   res.status(statusCode).json(err);
 });
+
+module.exports = app;
