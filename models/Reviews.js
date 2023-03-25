@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const User = require("./User");
+const Salon = require("./Salon");
 const Schema = mongoose.Schema;
 const ReviewSchema = new Schema({
   body: {
@@ -23,6 +24,12 @@ const ReviewSchema = new Schema({
     {
       type: Schema.Types.ObjectID,
       ref: User,
+    },
+  ],
+  salon: [
+    {
+      type: Schema.Types.ObjectID,
+      ref: Salon,
     },
   ],
 });

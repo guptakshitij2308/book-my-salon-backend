@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
-const Review = require("./Reviews");
-const Owner = require("./Owner");
+const Reviews = require("./Reviews");
+const validator = require("validator");
 
 const Schema = mongoose.Schema;
-const validator = require("validator");
 
 const SalonSchema = new Schema({
   name: {
@@ -13,7 +12,6 @@ const SalonSchema = new Schema({
     unique: true,
     maxlength: [30, "A Salon name must be less than 30 characters"],
     minlength: [10, "A Salon name must be greater than 10 characters"],
-    validate: [validator.isAlpha, "A Tour name must only contain characters"],
   },
   address: {
     type: String,
@@ -54,15 +52,34 @@ const SalonSchema = new Schema({
   reviews: [
     {
       type: Schema.Types.ObjectID,
-      ref: "Reviews",
+      ref: Reviews,
     },
   ],
-  ownerName: [
-    {
-      type: Schema.Types.ObjectID,
-      ref: "Owner",
+  ownerInfo: {
+    name: {
+      type: String,
+      required: [true, "Please tell us your name"],
+      trim: true,
+      maxlength: [30, "Your name must be less than 30 characters"],
     },
-  ],
+    contactNo: {
+      type: String,
+      required: true,
+      minlength: [10, "A mobile number must be of 10 characters"],
+      maxlength: [10, "A mobile number must be of 10 characters"],
+      validate: [
+        validator.isNumeric,
+        "A mobile number must contain only digits",
+      ],
+    },
+    email: {
+      type: String,
+      required: [true, "Please provide your email"],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, "Please provider a valid email address"],
+    },
+  },
 });
 
 const Salon = mongoose.model("Salon", SalonSchema);
