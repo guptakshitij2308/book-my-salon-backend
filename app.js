@@ -2,6 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const ExpressError = require("./utils/ExpressError");
 const salons = require("./routes/salon");
+const users = require("./routes/users");
 
 const app = express();
 
@@ -9,6 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/salons", salons);
+app.use("/users", users);
 
 app.get("/", (req, res) => {
   res.send("Hii");
